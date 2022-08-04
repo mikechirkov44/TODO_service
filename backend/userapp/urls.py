@@ -1,7 +1,8 @@
-from django.urls import path, include
+from django.urls import include, path
+from rest_framework.routers import DefaultRouter
+
 from userapp.apps import UserappConfig
 
-from rest_framework.routers import DefaultRouter
 from .views import UserModelViewSet
 
 app_name = UserappConfig.name
