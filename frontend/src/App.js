@@ -18,7 +18,7 @@ class App extends React.Component {
   componentDidMount() {
     axios.get(UserApi)
       .then(response => {
-        const users = response.data
+        const users = response.data.results
         this.setState(
           {
             'users': users
@@ -32,7 +32,7 @@ class App extends React.Component {
       <>
         <MainMenu />
         <UserList users={this.state.users} />
-        <Footer />
+        <Footer />s
       </>
     )
   }
