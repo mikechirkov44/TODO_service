@@ -15,8 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from rest_framework.routers import DefaultRouter
+
+from userapp.views import UserModelViewSet
+from projectapp.views import NotesModelViewSet, ProjectModelViewSet
+
+router = DefaultRouter()
+router.register('users', UserModelViewSet)
+router.register('notes', NotesModelViewSet)
+router.register('projects', ProjectModelViewSet)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("userapp/", include("userapp.urls", namespace="userapp")),
+    path("api/", include(router.urls)),
 ]

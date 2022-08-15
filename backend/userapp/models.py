@@ -1,8 +1,5 @@
-from tabnanny import verbose
-
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from pyexpat import model
 
 
 class User(AbstractUser):

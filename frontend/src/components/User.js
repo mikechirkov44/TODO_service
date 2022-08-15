@@ -1,4 +1,5 @@
 import React from 'react';
+import { MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
 
 
 
@@ -24,22 +25,20 @@ const UserItem = ({ user }) => {
 
 const UserList = ({ users }) => {
     return (
-        <table>
-            <th>
-                User_name
-            </th>
-            <th>
-                Firstname
-            </th>
-            <th>
-                Lastname
-            </th>
-            <th>
-                Role
-            </th>
-            {users.map((user) => < UserItem user={user} />)}
-        </table>
+        <MDBTable className='container-md'>
+            <MDBTableHead>
+                <tr>
+                    <th>Username</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Role</th>
+                </tr>
+            </MDBTableHead>
+            <MDBTableBody>
+                {users.map((user) => <UserItem user={user} />)}
+            </MDBTableBody>
+        </MDBTable>
     )
 }
 
-export default UserList
+export default UserList;
