@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "corsheaders",
     "userapp",
+    "projectapp",
 ]
 
 MIDDLEWARE = [
@@ -128,6 +129,14 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = 'userapp.User'
 
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ]
+}
+
 CORS_ALLOWED_ORIGINS = [
+    "http://127.0.0.1:3000",
     "http://localhost:3000",
 ]

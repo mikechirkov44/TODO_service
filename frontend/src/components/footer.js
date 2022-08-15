@@ -1,34 +1,15 @@
 import React from 'react';
-import {
-    MDBFooter,
-    MDBContainer,
-    MDBCol,
-    MDBRow,
-    MDBBtn
-} from 'mdb-react-ui-kit';
+import { MDBFooter } from 'mdb-react-ui-kit';
 
-function Footer() {
+export default function App() {
     return (
-        <MDBFooter className='text-center text-white' style={{ backgroundColor: '#0a4275' }}>
-            <MDBContainer className='p-4 pb-0'>
-                <section className=''>
-                    <p className='d-flex justify-content-center align-items-center'>
-                        <span className='me-3'>Register for free</span>
-                        <MDBBtn type='button' outline color="light" rounded>
-                            Sign up!
-                        </MDBBtn>
-                    </p>
-                </section>
-            </MDBContainer>
-
+        <MDBFooter bgColor='grey' className='text-center text-lg-left mt-auto'>
             <div className='text-center p-3' style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
-                © 2020 Copyright:
-                <a className='text-white' href='https://mdbootstrap.com/'>
-                    MDBootstrap.com
+                &copy; {new Date().getFullYear()} Copyright:{' Mike Chirkov '}
+                <a className='text-dark' href='https://github.com/mikechirkov44'>
+                    GitHub
                 </a>
             </div>
         </MDBFooter>
     );
 }
-
-export default Footer;
