@@ -4,7 +4,8 @@ import { MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
 
 
 
-const ProjectItem = ({ project }) => {
+const ProjectItem = ({ project, project_team }) => {
+
     return (
         <tr>
             <td>
@@ -17,7 +18,7 @@ const ProjectItem = ({ project }) => {
                 {project.description}
             </td>
             <td>
-                {project.git_link}
+                <a href={project.git_link}>{project.git_link}</a>
             </td>
             <td>
                 {project.owner}
