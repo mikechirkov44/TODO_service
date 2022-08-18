@@ -3,51 +3,51 @@ import { MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
 
 
 
-const UserItem = ({ user }) => {
+const NoteItem = ({ note }) => {
     return (
         <tr>
             <td>
-                {user.username}
+                {note.id}
             </td>
             <td>
-                {user.first_name}
+                {note.title}
             </td>
             <td>
-                {user.last_name}
+                {note.description}
             </td>
             <td>
-                {user.email}
+                {note.owner}
             </td>
             <td>
-                {user.role}
+                {note.project}
             </td>
+
         </tr>
     )
 }
 
-const UserList = ({ users }) => {
+const NoteList = ({ notes }) => {
     return (
         <>
             <br />
-            <h2 class='text-center text-primary'>Users</h2>
+            <h2 class='text-center text-primary'>Notes</h2>
             <hr />
             <MDBTable className='container-md'>
                 <MDBTableHead>
                     <tr>
-                        <th>Username</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Email</th>
-                        <th>Role</th>
+                        <th>Id</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Owner</th>
+                        <th>Project</th>
                     </tr>
                 </MDBTableHead>
                 <MDBTableBody>
-                    {users.map((user) => <UserItem key={user.id.toString()} user={user} />)}
+                    {notes.map((note) => <NoteItem key={note.id.toString()} note={note} />)}
                 </MDBTableBody>
             </MDBTable>
         </>
     )
 }
-
-export default UserList;
-export { UserItem };
+export default NoteList;
+export { NoteItem };

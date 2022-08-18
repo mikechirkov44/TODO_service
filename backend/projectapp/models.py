@@ -15,10 +15,10 @@ class ProjectModel(models.Model):
     project_team = models.ManyToManyField(
         User, related_name='project_team', verbose_name='Project team')
     name = models.CharField(verbose_name='Project name', max_length=128)
-    discription = models.TextField(verbose_name='Discription')
+    description = models.TextField(verbose_name='Description', default='')
 
     def __str__(self) -> str:
-        return f'{self.author} {self.name}'
+        return f'{self.owner} {self.name}'
 
     def delete(self, *args) -> None:
         return super().delete(*args)
@@ -37,12 +37,12 @@ class ToDo_noteModel(models.Model):
     project = models.ForeignKey(ProjectModel, on_delete=models.CASCADE,
                                 related_name='project_notes', verbose_name='Project')
     title = models.CharField(verbose_name='Title', max_length=128)
-    discription = models.TextField(verbose_name="Discription")
+    description = models.TextField(verbose_name="Description", default='')
     is_closed = models.BooleanField(
         default=False, verbose_name='is_closed')
 
     def __str__(self) -> str:
-        return f'{self.author} {self.project} {self.title}'
+        return f'{self.owner} {self.project} {self.title}'
 
     def delete(self, *args) -> None:
         return super().delete(*args)
