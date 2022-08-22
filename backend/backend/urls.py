@@ -28,5 +28,6 @@ router.register('projects', ProjectModelViewSet)
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("userapp/", include("userapp.urls", namespace="userapp")),
+    path("projectapp/", include("projectapp.urls", namespace="projectapp")),
     path("api/", include(router.urls)),
 ]
