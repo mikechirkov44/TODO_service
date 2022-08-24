@@ -1,10 +1,9 @@
+from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.viewsets import ModelViewSet
 
-from .models import ToDo_noteModel, ProjectModel
-from .serializer import NotesModelSerializer, ProjectModelSerializer
-
 from .filters import ProjectModelFilter, ToDoModelFilter
-from rest_framework.pagination import LimitOffsetPagination
+from .models import ProjectModel, ToDo_noteModel
+from .serializer import NotesModelSerializer, ProjectModelSerializer
 
 
 class NotneLimitOffsetPagination(LimitOffsetPagination):

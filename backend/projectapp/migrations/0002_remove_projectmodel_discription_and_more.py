@@ -6,26 +6,26 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('projectapp', '0001_initial'),
+        ("projectapp", "0001_initial"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='projectmodel',
-            name='discription',
+            model_name="projectmodel",
+            name="discription",
         ),
         migrations.RemoveField(
-            model_name='todo_notemodel',
-            name='discription',
+            model_name="todo_notemodel",
+            name="discription",
         ),
         migrations.AddField(
-            model_name='projectmodel',
-            name='description',
-            field=models.TextField(default='', verbose_name='Description'),
+            model_name="projectmodel",
+            name="description",
+            field=models.TextField(default="", verbose_name="Description"),
         ),
         migrations.AddField(
-            model_name='todo_notemodel',
-            name='description',
-            field=models.TextField(default='', verbose_name='Description'),
+            model_name="todo_notemodel",
+            name="description",
+            field=models.TextField(default="", verbose_name="Description"),
         ),
     ]
