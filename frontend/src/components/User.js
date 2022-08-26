@@ -29,7 +29,7 @@ const UserList = ({ users }) => {
     return (
         <>
             <br />
-            <h2 class='text-center text-primary'>Users</h2>
+            <h3 class='text-center text-primary'>Users</h3>
             <hr />
             <MDBTable className='container-md'>
                 <MDBTableHead>

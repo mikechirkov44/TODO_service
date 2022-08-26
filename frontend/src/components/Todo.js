@@ -30,7 +30,7 @@ const NoteList = ({ notes }) => {
     return (
         <>
             <br />
-            <h2 class='text-center text-primary'>Notes</h2>
+            <h3 class='text-center text-primary'>Notes</h3>
             <hr />
             <MDBTable className='container-md'>
                 <MDBTableHead>
