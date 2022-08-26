@@ -14,6 +14,7 @@ import {
     MDBDropdownItem,
     MDBDropdownLink,
     MDBCollapse,
+    MDBCardLink,
 } from 'mdb-react-ui-kit';
 
 function MainMenu() {
@@ -54,8 +55,11 @@ function MainMenu() {
                                 </MDBDropdownMenu>
                             </MDBDropdown>
                         </MDBNavbarItem>
+
+
                     </MDBNavbarNav>
                 </MDBCollapse>
+                <MDBCardLink href='/login'>Login</MDBCardLink>
             </MDBContainer>
         </MDBNavbar>
     );

@@ -8,6 +8,7 @@ import ProjectInfoList from './components/ProjectInfo';
 import axios from 'axios';
 import NotFound404 from './components/404NotFound';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import LoginForm from './components/LoginForm';
 
 const UserApi = 'http://127.0.0.1:8000/userapp/api/users/';
 const ProjectApi = 'http://127.0.0.1:8000/projectapp/api/projects/';
@@ -67,6 +68,7 @@ class App extends React.Component {
           </nav>
           <Routes>
             <Route exect path='/users' element={<UserList users={this.state.users} />} />
+            <Route exect path='/login' element={<LoginForm />} />
             <Route path='/projects'>
               <Route index element={<ProjectList projects={this.state.projects} />} />
               <Route path=':projectId' element={<ProjectInfoList notes={this.state.notes} project_team={this.state.users} projects={this.state.projects} />} />
