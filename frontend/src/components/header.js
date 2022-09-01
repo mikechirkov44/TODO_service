@@ -14,9 +14,10 @@ import {
     MDBDropdownItem,
     MDBDropdownLink,
     MDBCollapse,
+    MDBCardLink,
 } from 'mdb-react-ui-kit';
 
-function MainMenu() {
+function MainMenu(auth) {
     const [showBasic, setShowBasic] = useState(false);
     return (
         <MDBNavbar expand='lg' light bgColor='light'>
@@ -54,8 +55,20 @@ function MainMenu() {
                                 </MDBDropdownMenu>
                             </MDBDropdown>
                         </MDBNavbarItem>
+                        <MDBNavbarItem>
+                            {auth.is_Auth() ?
+                                <MDBNavbarLink disabled href='#' tabIndex={-1} aria-disabled='true'>
+                                    You logged in as,  <b>{auth.currentUser}</b>
+                                </MDBNavbarLink> : <MDBNavbarLink disabled href='#' tabIndex={-1} aria-disabled='true'>
+                                    Anonim user, please Login to udentify yourself
+                                </MDBNavbarLink>}
+                        </MDBNavbarItem>
                     </MDBNavbarNav>
                 </MDBCollapse>
+                {auth.is_Auth() ?
+                    <MDBNavbarLink href='#' onClick={() => auth.logOut()}>Logout</MDBNavbarLink> :
+                    <MDBNavbarLink href='/login'>Login</MDBNavbarLink>}
+
             </MDBContainer>
         </MDBNavbar>
     );

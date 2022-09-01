@@ -35,7 +35,7 @@ const ProjectList = ({ projects }) => {
     return (
         <>
             <br />
-            <h2 class='text-center text-primary'>Projects</h2>
+            <h3 class='text-center text-primary'>Projects</h3>
             <hr />
             <MDBTable className='container-md'>
                 <MDBTableHead>
