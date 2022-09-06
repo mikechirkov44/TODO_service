@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "userapp",
     "projectapp",
     "django_filters",
+    'drf_yasg'
 ]
 
 MIDDLEWARE = [
