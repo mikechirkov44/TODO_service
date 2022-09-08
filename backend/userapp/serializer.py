@@ -1,3 +1,4 @@
+from dataclasses import field
 from rest_framework.serializers import ModelSerializer
 
 from .models import User
@@ -7,3 +8,10 @@ class UserModelSerializer(ModelSerializer):
     class Meta:
         model = User
         fields = ("id", "username", "first_name", "last_name", "email", "role")
+
+
+class UserModelSerializerV20(ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('username', 'first_name', 'last_name', 'email',
+                  'role', 'is_superuser', 'is_staff')
