@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     "userapp",
     "projectapp",
     "django_filters",
-    'drf_yasg'
+    "drf_yasg",
+    "graphene_django",
 ]
 
 MIDDLEWARE = [
@@ -164,3 +165,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:3000",
     "http://localhost:3000",
 ]
+
+GRAPHENE = {
+    "SCHEMA": "backend.schema.schema"
+}
