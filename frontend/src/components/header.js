@@ -68,9 +68,16 @@ function MainMenu(auth) {
                 {auth.is_Auth() ?
                     <MDBNavbarLink href='#' onClick={() => auth.logOut()}>Logout</MDBNavbarLink> :
                     <MDBNavbarLink href='/login'>Login</MDBNavbarLink>}
+                {auth.is_Auth() ?
+                    <MDBNavbarLink href='/projects/create'>Create Project</MDBNavbarLink> :
+                    <> </>}
+                {auth.is_Auth() ?
+                    <MDBNavbarLink href='/notes/create'>Create Note</MDBNavbarLink> :
+                    <> </>}
 
             </MDBContainer>
         </MDBNavbar>
+
     );
 }
 

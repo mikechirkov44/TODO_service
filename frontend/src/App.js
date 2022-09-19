@@ -9,6 +9,7 @@ import axios from 'axios';
 import NotFound404 from './components/404NotFound';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import LoginForm from './components/LoginForm';
+import ProjectForm from './components/ProjectForm';
 const UserApi = 'http://127.0.0.1:8000/userapp/api/users/';
 const ProjectApi = 'http://127.0.0.1:8000/projectapp/api/projects/';
 const NotesApi = 'http://127.0.0.1:8000/projectapp/api/notes/';
@@ -23,12 +24,13 @@ class App extends React.Component {
       'projects': [],
       'notes': [],
       'token': '',
-      'currentUser': '',
+      'currentUser': [],
+      'redirect': false
     }
   }
 
   is_Auth() {
-    return this.state.token !== ''
+    return !!this.state.token != ''
   }
 
   get_token(login, password) {
@@ -38,13 +40,14 @@ class App extends React.Component {
     })
       .then(response => {
         const token = response.data.token
-        console.log('token:', token)
+        const currentUser = this.state.users.filter((user) => user.username == login)[0]
+        // console.log('token:', token)
         localStorage.setItem('token', token)
-        localStorage.setItem('currentUser', login)
+        localStorage.setItem('currentUser', JSON.stringify(currentUser))
         this.setState(
           {
             'token': token,
-            'currentUser': login,
+            'currentUser': currentUser
           }, this.getData)
       }).catch(error => alert('Неверный логин или пароль'))
   }
@@ -66,7 +69,87 @@ class App extends React.Component {
     return {}
   }
 
+  createProject(
+    owner, git_link, project_team, name, discription
+  ) {
+
+    let headers = this.getHeaders()
+
+    axios
+      .post(ProjectApi, {
+        'owner': owner,
+        'git_link': git_link,
+        'project_team,': project_team,
+        'name': name,
+        'discription': discription
+      }, { headers })
+      .then(response => {
+        this.setState({
+          'redirect': '/'
+        }, this.getData)
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
+
+  deleteProject(projectId) {
+    let headers = this.getHeaders()
+
+    axios
+      .delete(`${ProjectApi}${projectId}`, { headers })
+      .then(response => {
+        this.setState({
+          'projects': this.state.projects.filter((project) => project.id !== projectId)
+        })
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
+
+  createNote(
+    owner, title, discription, project
+  ) {
+
+    let headers = this.getHeaders()
+
+    axios
+      .post(NotesApi, {
+        'owner': owner,
+        'title': title,
+        'discription': discription,
+        'project': project
+      }, { headers })
+      .then(response => {
+        this.setState({
+          'redirect': '/notes'
+        }, this.getData)
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
+
+  deleteNote(noteId) {
+    let headers = this.getHeaders()
+
+    axios
+      .delete(`${NotesApi}${noteId}`, { headers })
+      .then(response => {
+        this.setState({
+          'notes': this.state.projects.filter((note) => note.id != noteId)
+        })
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
+
   getData() {
+    this.setState({
+      'redirect': false
+    })
 
     let headers = this.getHeaders()
 
@@ -119,7 +202,8 @@ class App extends React.Component {
     localStorage.setItem('currentUser', '')
     this.setState({
       'token': '',
-      'currentUser': '',
+      'currentUser': [],
+      'redirect': '/'
     }, this.getData)
   }
 
@@ -127,6 +211,7 @@ class App extends React.Component {
     return (
       <div className='d-flex flex-column min-vh-100'>
         <BrowserRouter>
+          {this.state.redirect ? <Navigate to={this.state.redirect} replace={true} /> : <div />}
           <nav>
             <MainMenu is_Auth={() => this.is_Auth()} logOut={() => this.logOut()} currentUser={this.state.currentUser} />
           </nav>
@@ -134,8 +219,14 @@ class App extends React.Component {
             <Route exect path='/users' element={<UserList users={this.state.users} />} />
             <Route exect path='/login' element={<LoginForm get_token={(login, password) => this.get_token(login, password)} />} />
             <Route path='/projects'>
-              <Route index element={<ProjectList projects={this.state.projects} />} />
+              <Route index element={<ProjectList projects={this.state.projects} deleteProject={(projectId) => this.deleteProject(projectId)} />} />
               <Route path=':projectId' element={<ProjectInfoList notes={this.state.notes} project_team={this.state.users} projects={this.state.projects} />} />
+              <Route path='create' element={<ProjectForm
+                currentUser={this.state.currentUser}
+                project_team={this.state.users}
+                createProject={(owner, git_link, project_team, name, discription) => this.createProject(
+                  owner, git_link, project_team, name, discription
+                )} />} />
             </Route>
             <Route exect path='/notes' element={<NoteList notes={this.state.notes} />} />
             <Route path='*' element={<NotFound404 />} />
